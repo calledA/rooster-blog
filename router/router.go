@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"rooster-blog/middleware/jwt"
-	"rooster-blog/api/article"
+	"rooster-blog/models"
+	// "rooster-blog/api/article"
 )
 
 func InitRouter() *gin.Engine {
@@ -12,10 +12,13 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	articleApi := router.Group("/api/admin")
-	articleApi.Use(jwt.JWT())
-	{
-		articleApi.GET("/articles",article.GetArticles)
-	}
+	router.GET("/login",models.CheckAuth)
+	router.GET("/home",models.Oauth)
+
+	// articleApi := router.Group("/api/admin")
+	// articleApi.Use(jwt.JWT())
+	// {
+	// 	articleApi.GET("/articles",article.GetArticles)
+	// }
 	return router
 }
