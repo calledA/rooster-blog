@@ -52,7 +52,7 @@ func JWT() gin.HandlerFunc {
 				logging.Error("生成token出错",err)
 				return
 			}
-			c.SetCookie("Authorization", token, 7*24*60*60, "/", "127.0.0.1", false, false)
+			c.SetCookie("Authorization", token, 7*24*60*60, "/", "127.0.0.1", false, true)
 		} else {
 			claims,err := ParseToken(tokenString)
 			if err != nil {
