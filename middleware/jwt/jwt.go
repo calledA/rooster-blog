@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"fmt"
+	// "go/token"
 	"rooster-blog/models"
 	"rooster-blog/pkg/e"
 	"rooster-blog/pkg/logging"
@@ -104,3 +105,24 @@ func ParseToken(token string) (*Claims,error) {
 	return nil,e
 }
 
+
+// func RefreshToken(tokenString string) *Claims {
+// 	jwt.TimeFunc = func() time.Time {
+// 		return time.Unix(0,0)
+// 	}
+// 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+// 		return jwtSecret, nil
+// 	})
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	claims,ok := token.Claims.(*Claims)
+// 	if !ok {
+// 		logging.Fatal("token生成失败")
+// 	}
+// 	jwt.TimeFunc = time.Now
+// 	claims.StandardClaims.ExpiresAt = time.Now().Add(2 * time.Hour).Unix()
+// 	return GenerateToken(claims)
+// }
