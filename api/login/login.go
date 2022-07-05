@@ -35,7 +35,7 @@ func Login(ctx *gin.Context) {
 				code = e.ERROR_AUTH_TOKEN
 			} else {
 				code = e.SUCCESS
-				ctx.SetCookie("Authorization", token, 7*24*60*60, "/", "127.0.0.1", false, true)
+				ctx.Header("Authorization",token)
 			}
 		} else {
 			code = e.ERROR_AUTH
