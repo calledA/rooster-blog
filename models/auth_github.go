@@ -64,7 +64,7 @@ func GetToken(url string) (*Token, error) {
 	var req *http.Request
 	var err error
 	if req, err = http.NewRequest(http.MethodGet, url, nil); err != nil {
-		logging.Error("形成请求失败",err)
+		logging.Error("生成请求失败",err)
 		return nil, err
 	}
 	req.Header.Set("accept", "application/json")

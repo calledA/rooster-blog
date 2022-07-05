@@ -27,8 +27,8 @@ type Claims struct {
 
 type Admin struct {
 	ID int `gorm:"primary_key" json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Email string
+	Password string
 }
 
 func JWT() gin.HandlerFunc {
@@ -44,7 +44,7 @@ func JWT() gin.HandlerFunc {
 		password := c.Query("password")
 
 		if tokenString == "" {
-			models.DB.Select("id").Where(Admin{Username: username,Password: password}).First(&admin)
+			models.DB.Select("id").Where(Admin{Email: username,Password: password}).First(&admin)
 			if admin.ID < 0 {
 				return
 			}

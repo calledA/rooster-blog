@@ -7,13 +7,13 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/go-ini/ini"
+	// "github.com/go-ini/ini"
 
 )
 
 var (
 	DB *gorm.DB
-	Cfg *ini.File
+	// Cfg *ini.File
 )
 
 func init() {

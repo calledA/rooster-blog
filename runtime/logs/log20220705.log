@@ -1,0 +1,2 @@
+[ERROR][auth_github.go:54]2022/07/05 16:45:38 [userinfo message Bad credentials]
+[ERROR][auth_github.go:54]2022/07/05 16:45:38 [userinfo documentation_url https://docs.github.com/rest]

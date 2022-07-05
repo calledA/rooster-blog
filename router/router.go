@@ -1,13 +1,14 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
-	"rooster-blog/models"
-	"rooster-blog/pkg/logging"
-	"rooster-blog/middleware/jwt"
 	"rooster-blog/api/article"
-	"rooster-blog/pkg/cors"
+	"rooster-blog/api/login"
+	"rooster-blog/middleware/cors"
+	"rooster-blog/middleware/jwt"
+	"rooster-blog/models"
+	_ "rooster-blog/pkg/logging"
 
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
@@ -17,9 +18,7 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 	router.Use(cors.Cors())
 	
-	logging.Info("开始请求")
-	
-	router.GET("/login",models.CheckAuth)
+	router.POST("/login",login.Login)
 	router.GET("/home",models.Oauth)
 
 	articleApi := router.Group("/api/admin")
