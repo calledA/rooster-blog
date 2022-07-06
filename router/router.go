@@ -1,7 +1,7 @@
 package router
 
 import (
-	"rooster-blog/api/article"
+	// "rooster-blog/api/article"
 	"rooster-blog/api/login"
 	"rooster-blog/middleware/cors"
 	"rooster-blog/middleware/jwt"
@@ -18,13 +18,16 @@ func InitRouter() *gin.Engine {
 	router.Use(gin.Recovery())
 	router.Use(cors.Cors())
 	
-	router.POST("/login",login.Login)
 	router.GET("/home",models.Oauth)
+	router.POST("/api/admin/login",login.LoginAuth)
 
-	articleApi := router.Group("/api/admin")
-	articleApi.Use(jwt.JWT())
+	adminApi := router.Group("/api/admin")
+	adminApi.Use(jwt.JWT())
 	{
-		articleApi.GET("/articles",article.GetArticles)
+		//管理员登陆
+		adminApi.POST("/articles",login.LoginAuth)
+
 	}
+
 	return router
 }

@@ -12,11 +12,11 @@ import (
 )
 
 type Admin struct {
-	Email    string
+	Username    string
 	Password string
 }
 
-func Login(ctx *gin.Context) {
+func LoginAuth(ctx *gin.Context) {
 	var admin Admin
 	var code int
 	err := ctx.BindJSON(&admin)
@@ -28,9 +28,9 @@ func Login(ctx *gin.Context) {
 	ok, _ := valid.Valid(&admin)
 
 	if ok {
-		isExist := models.CheckAdmin(admin.Email, admin.Password)
+		isExist := models.CheckAdmin(admin.Username, admin.Password)
 		if isExist {
-			token, err := jwt.GenerateToken(admin.Email, admin.Password)
+			token, err := jwt.GenerateToken(admin.Username, admin.Password)
 			if err != nil {
 				code = e.ERROR_AUTH_TOKEN
 			} else {
@@ -46,11 +46,10 @@ func Login(ctx *gin.Context) {
 		}
 	}
 
-	if code == 200 {
-		ctx.JSON(http.StatusOK, gin.H{
-			"code":  code,
-			"msg":   e.GetMsg(code),
-		})
-	}
-
+	ctx.JSON(http.StatusOK, gin.H{
+		"code":  code,
+		"msg":   e.GetMsg(code),
+	})
 }
+
+
