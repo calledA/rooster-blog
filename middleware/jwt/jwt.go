@@ -3,6 +3,7 @@ package jwt
 import (
 	// "fmt"
 	// "go/token"
+	// "fmt"
 	"rooster-blog/pkg/e"
 	"rooster-blog/pkg/logging"
 
@@ -39,6 +40,7 @@ func JWT() gin.HandlerFunc {
 			claims, err := ParseToken(tokenString)
 			if err != nil {
 				code = e.ERROR_AUTH_CHECK_TOKEN_FAIL
+				logging.Info(e.GetMsg(code))
 			} else if time.Now().Unix() > claims.ExpiresAt {
 				code = e.ERROR_AUTH_CHECK_TOKEN_TIMEOUT
 			}
@@ -79,7 +81,7 @@ func ParseToken(token string) (*Claims, error) {
 		return jwtSecret, nil
 	})
 	if tokenClaims != nil {
-		if claim, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {
+		if claim, ok := tokenClaims.Claims.(*Claims); ok {
 			return claim, nil
 		}
 	}
