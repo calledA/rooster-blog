@@ -27,20 +27,22 @@ func InitRouter() *gin.Engine {
 	adminApi.Use(jwt.JWT())
 	{
 		//总点击数
-		adminApi.GET("/clicks",articles.GetClicks)
+		adminApi.GET("/click",articles.GetArticleClicksApi)
 
 		//文章点击数排名
-		adminApi.GET("/ranks",login.LoginAuth)
+		adminApi.GET("/rank",articles.GetArticleRankApi)
 
 		//总访问量(按月排)
-		adminApi.GET("/visits",login.LoginAuth)
+		adminApi.GET("/visit",articles.GetArticleVisitApi)
 
 		//每天的访问主题数量
-		adminApi.GET("/topic_visit",login.LoginAuth)
+		adminApi.GET("/topic_visit",articles.GetTopicVisitApi)
 
 		//总的主题排名
-		adminApi.GET("/topic_rank",login.LoginAuth)
+		adminApi.GET("/topic_rank",articles.GetTopicRankApi)
 	}
+
+	
 
 	return router
 }

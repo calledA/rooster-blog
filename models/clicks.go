@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	// "fmt"
+	"time"
+)
 
 type Click struct {
 	Id          int
@@ -10,11 +13,12 @@ type Click struct {
 	ClickTime   string
 	ClickBy     string
 }
-
-func GetClicks(id int) string {
-	var click Click
-	DB.Select("topic").Where("Id = ?",id).Find(&click)
-	return click.Topic
+func GetClicks() (int64, error) {
+	var count int64
+	if err := DB.Model(&Click{}).Count(&count).Error; err != nil {
+		return count, err
+	}
+	return count, nil
 }
 
 func CurrentDateTime() string {

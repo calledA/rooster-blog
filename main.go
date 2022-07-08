@@ -1,8 +1,8 @@
 package main
 
 import (
+	// "fmt"
 	"rooster-blog/router"
-
 )
 
 func main() {

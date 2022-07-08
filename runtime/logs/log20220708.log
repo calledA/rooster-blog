@@ -1,0 +1,1 @@
+[FATAL][clicks.go:38]2022/07/08 17:05:20 [redis connect err dial tcp 127.0.0.1:6379: connectex: No connection could be made because the target machine actively refused it.]
