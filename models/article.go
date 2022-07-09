@@ -1,10 +1,8 @@
 package models
 
-import "fmt"
-
 type Article struct {
 	Id           int
-	TagId        int
+	TagId        string
 	Title        string
 	Desc         string
 	Content      string
@@ -12,17 +10,22 @@ type Article struct {
 	CreatedBy    string
 	ModifiedOn   string
 	ModifiedBy   string
-	state        int
-	ArticleClick int64
+	State        int
+	ArticleClick int
 	ArticleIp    string
 }
 
-func GetArticleRank() {
-	var article []Article
-	err := DB.Order("article_click desc").Limit(10).Find(&article).Error
-	if err != nil {
-		return
+
+func GetArticleRank() (article []Article,err error) {
+	if err = DB.Order("article_click desc").Limit(10).Find(&article).Error;err != nil {
+		return article,err
 	}
-	fmt.Println(article)
-	// return article,err
+	return article,nil
+}
+
+func GetClicks() (total []Article,err error) {
+	if err := DB.Find(&total).Error; err != nil {
+		return total, err
+	}
+	return total, nil
 }

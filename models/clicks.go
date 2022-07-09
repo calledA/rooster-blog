@@ -13,13 +13,7 @@ type Click struct {
 	ClickTime   string
 	ClickBy     string
 }
-func GetClicks() (int64, error) {
-	var count int64
-	if err := DB.Model(&Click{}).Count(&count).Error; err != nil {
-		return count, err
-	}
-	return count, nil
-}
+
 
 func CurrentDateTime() string {
 	timeUnix := time.Now().Unix()

@@ -1,7 +1,6 @@
 package router
 
 import (
-	// "rooster-blog/api/article"
 	"rooster-blog/api/login"
 	"rooster-blog/api/admin/articles"
 	"rooster-blog/middleware/cors"
@@ -31,12 +30,6 @@ func InitRouter() *gin.Engine {
 
 		//文章点击数排名
 		adminApi.GET("/rank",articles.GetArticleRankApi)
-
-		//总访问量(按月排)
-		adminApi.GET("/visit",articles.GetArticleVisitApi)
-
-		//每天的访问主题数量
-		adminApi.GET("/topic_visit",articles.GetTopicVisitApi)
 
 		//总的主题排名
 		adminApi.GET("/topic_rank",articles.GetTopicRankApi)

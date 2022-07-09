@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "fmt"
 	"rooster-blog/router"
 )
 
